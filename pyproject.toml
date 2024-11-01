@@ -1,0 +1,59 @@
+[project]
+name = "perfnetto"
+version = "0.1.0"
+description = "Trace Python code with the Google Perfetto tracing library"
+requires-python = ">=3.10"
+authors = [
+    { name = "Aarni Koskela", email = "akx@iki.fi" }
+]
+readme = "README.md"
+dependencies = []
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-cov"]
+dev = ["pytest", "pytest-cov", "ruff"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+exclude = ["*.pyx", "*.cc"]
+
+[tool.hatch.build.targets.wheel.hooks.cython]
+dependencies = ["hatch-cython"]
+
+[tool.hatch.build.targets.wheel.hooks.cython.options]
+compile_py = false
+compile_args = ["-v"]
+env = [
+    { env = "CPPFLAGS", arg = "-std=c++17", platforms = ["linux", "darwin"] },
+    { env = "CPPFLAGS", arg = "/std:c++17", platforms = ["windows"] },
+]
+
+[tool.ruff]
+exclude = [
+    "vendor",
+]
+
+[tool.ruff.lint]
+select = [
+    "B",
+    "COM812",
+    "E",
+    "F",
+    "I",
+    "W",
+]

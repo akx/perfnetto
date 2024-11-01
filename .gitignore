@@ -1,0 +1,12 @@
+*.c
+*.cpp
+*.dump
+*.egg-info
+*.py[oc]
+*.so
+.venv
+/experiment*
+__pycache__/
+build/
+dist/
+wheels/

@@ -1,0 +1,3 @@
+[submodule "src/perfnetto/vendor/perfetto"]
+	path = vendor/perfetto
+	url = https://android.googlesource.com/platform/external/perfetto.git
