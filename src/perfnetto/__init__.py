@@ -25,8 +25,10 @@ def tracing(
     if not output_path:
         output_path = f"perfnetto-{int(time.time() * 1000)}.dump"
         if output_dir := os.environ.get("PERFNETTO_OUTPUT_DIR"):
-            os.makedirs(output_dir, exist_ok=True)
             output_path = os.path.join(output_dir, output_path)
+
+    if output_path:
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     try:
         _perfnetto.start(
