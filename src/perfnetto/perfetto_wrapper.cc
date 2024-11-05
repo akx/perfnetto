@@ -71,7 +71,7 @@ void pw_init_perfetto(bool use_system_backend) {
   perfnetto_initialized = 1;
 }
 
-int pw_start_tracing(bool all_threads, int size_kb, const char *output_file) {
+int pw_start_tracing(bool all_threads, int size_kb, const char *output_file, const char *session_name) {
   // TODO: should ensure this can't be called reentrantly etc.
   if (tracing_session.get() != nullptr) {
     return 42;
@@ -87,6 +87,9 @@ int pw_start_tracing(bool all_threads, int size_kb, const char *output_file) {
   if (output_file != nullptr) {
     cfg.set_write_into_file(true);
     cfg.set_output_path(output_file);
+  }
+  if (session_name != nullptr) {
+    cfg.set_unique_session_name(session_name);
   }
   auto *ds_cfg = cfg.add_data_sources()->mutable_config();
   ds_cfg->set_name("track_event");
