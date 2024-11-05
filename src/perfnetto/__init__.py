@@ -18,8 +18,9 @@ class TracingContext:
 def tracing(
     *,
     all_threads: bool = True,
-    size_kb: int = 65536,
     output_path: str | None = None,
+    session_name: str | None = None,
+    size_kb: int = 65536,
 ) -> TracingContext:
     if not output_path:
         output_path = f"perfnetto-{int(time.time() * 1000)}.dump"
@@ -30,8 +31,9 @@ def tracing(
     try:
         _perfnetto.start(
             all_threads=all_threads,
-            size_kb=size_kb,
             output_path=output_path,
+            session_name=session_name,
+            size_kb=size_kb,
         )
         yield TracingContext(output_path=output_path)
     finally:
