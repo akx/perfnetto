@@ -116,9 +116,11 @@ std::vector<char> pw_stop_tracing(bool read_data) {
   auto sess = tracing_session.release();
   sess->StopBlocking();
   if (!read_data) {
+    delete sess;
     return std::vector<char>();
   }
   std::vector<char> trace_data(sess->ReadTraceBlocking());
+  delete sess;
   return trace_data;
 }
 
