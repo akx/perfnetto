@@ -1,5 +1,14 @@
 # Perfnetto
 
+## Note
+
+> [!NOTE]
+> The [Viztracer](https://github.com/gaogaotiantian/viztracer) project
+> does the same thing this project aims to do, but is much more complete,
+> so check it out first.
+
+## Introduction
+
 Perfnetto wraps the [Perfetto tracing SDK](https://perfetto.dev/docs/instrumentation/tracing-sdk)
 to make it possible to trace Python code.
 
